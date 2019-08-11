@@ -17,16 +17,17 @@ import numpy as np
 if __name__ == '__main__':
     train = pd.read_csv('trainset.txt', header=0, delimiter="\t", quoting=3)
 
-    print "\n\n The program was written for assignment purpose. Always always consult a doctor and never look up the symptoms on the internet :-) \n\n\n"
+    print ("\n\n The program was written for assignment purpose. Always always consult a doctor and never look up the symptoms on the internet :-) \n\n\n")
     
 #Ask the user for symptoms
+    raw_input = input("Type the symptoms with space and press enter")
     test=["input", ""] 
-    test[0]=raw_input("Type the symptoms with space and press enter")
+    test[0]=raw_input
     #test= raw_input()	
     
     
 
-    print '\n\nPlease uncomment nltk.download() to download text data sets \n'
+    print ('\n\nPlease uncomment nltk.download() to download text data sets \n')
     #nltk.download()  # Download text data sets, including stop words
 
     # Initialize an empty list to hold the clean symptoms and summary
@@ -35,10 +36,10 @@ if __name__ == '__main__':
 
     
 
-    print "Cleaning and parsing the training set symptoms...\n"
+    print ("Cleaning and parsing the training set symptoms...\n")
     for i in xrange( 0, len(train["symptom"])):
         clean_train_symptom.append(" ".join(Word2VecUtility.symptoms_to_wordlist(train["symptom"][i],True)))
-    print "Cleaning and parsing the training set summary...\n"
+    print ("Cleaning and parsing the training set summary...\n")
     for i in xrange( 0, len(train["summary"])):
         
 	clean_train_summary[train["disease"][i]] = "".join(Word2VecUtility.summary_to_wordlist(train["summary"][i]))
@@ -46,7 +47,7 @@ if __name__ == '__main__':
     
     # ****** Create a bag of words from the training set
     #
-    print "Creating the bag of words...\n"
+    print ("Creating the bag of words...\n")
     
 
     # Initialize the "CountVectorizer" object, which is scikit-learn's
@@ -68,7 +69,7 @@ if __name__ == '__main__':
 
     # ******* Train a random forest using the bag of words
     #
-    print "Training the random forest (this may take a while)..."
+    print ("Training the random forest (this may take a while)...")
 
 
     # Initialize a Random Forest classifier with 200 trees
@@ -88,11 +89,10 @@ if __name__ == '__main__':
     
 
     # Use the random forest to make sentiment label predictions
-    print "Predicting test labels...\n"
+    print (9"Predicting test labels...\n"))
     result = forest.predict(test_data_features)
-    print "the disease is",result[0]
-    print clean_train_summary[result[0]]
-
+    print ("the disease is",result[0])
+    print (clean_train_summary[result[0]])
 
 
 
